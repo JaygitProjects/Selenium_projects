@@ -9,6 +9,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -27,6 +28,7 @@ public class A2Q6 {
         driver = new ChromeDriver();
         driver.get("http://uitest.automationtester.uk/bootstrap-download-progress-demo.html");
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 
     }
     @Test
@@ -37,10 +39,16 @@ public class A2Q6 {
         download.click();
 
         //waiting until 100% is shown
-        WebDriverWait wait = new WebDriverWait(driver,40);
-        WebElement percent = driver.findElement(By.xpath("//div[contains(text(),'0%')]"));
 
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'100%')]")));
+        WebElement percent = driver.findElement(By.xpath("//div[contains(text(),'0%')]"));
+        WebDriverWait wait = new WebDriverWait(driver,40);
+    //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'100%')]")));
+    //or
+        wait.until(ExpectedConditions.textToBePresentInElement(percent,"100%"));
+        System.out.println(percent.getText());
+        Thread.sleep(2000);
+        Assert.assertEquals(percent.getText(),"100%");
+
 
     }
     @AfterClass

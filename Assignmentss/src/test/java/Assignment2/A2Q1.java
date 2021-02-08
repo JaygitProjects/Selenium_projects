@@ -30,27 +30,26 @@ public class A2Q1 {
     @Test
     public void testTableXpath() throws InterruptedException {
         List<WebElement> company = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
-        //List<WebElement> company = driver.findElements(By.xpath("//th[text()='Company']"));
-
 
         List<WebElement> currentPrice = driver.findElements(By.xpath("//table/tbody/tr/td[4]"));
+        System.out.println("Company Size = "+company.size());
 //get(i)
-        //for (int i = 1; i < company.size(); i++) {
-            for (int i = 1; i < 20; i++) {
+        //for (int i = 0; i < company.size(); i++) {
+            for (int i = 0; i < 20; i++) {
             System.out.println("Company Name is  " + company.get(i).getText() + ".  Its Current Price is" + currentPrice.get(i).getText());
             }
         // passing the parameter(string cell value to compare) here, instead of creating new class and sending from there
         //through method
 
             //as the method returns its corresponding row number assign the value return to int variable
-        int result =  getRowWithCellText("Bajaj");
+        int result =  getRowWithCellText("Indian Bank");
         System.out.println( "\n Element is found at the Row:  " + result);
 
     }
 
         private int getRowWithCellText(String cellDataToFind){
             int rowWithTextCell =0;
-
+            // get the row size
            int rows= driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr")).size();
             System.out.println("\n\n Entire row Size = " +rows);
             //i is the row number we are iterating

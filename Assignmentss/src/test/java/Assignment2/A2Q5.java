@@ -32,25 +32,25 @@ public class A2Q5 {
     }
     @Test
     public void testToMoveList() throws InterruptedException {
-        /*driver.findElement(By.xpath("//div[@class='well text-right']/div/div/div/input[@name='SearchDualList']")).sendKeys("bootstrap");
-        WebElement element = driver.findElement(By.xpath())*/
-        //
-        WebElement leftBootStrap = driver.findElement(By.xpath("//li[@class='list-group-item' and text()='bootstrap-duallist ']"));
-        leftBootStrap.click();
-        System.out.println("Item before moved : "+leftBootStrap.getText());
-        String actRes = leftBootStrap.getText();
-
-        Thread.sleep(1000);
-        WebElement button1 = driver.findElement(By.xpath("//button[@class='btn btn-default btn-sm move-right']"));
-        button1.click();
-
-        WebElement rightBootStrap = driver.findElement(By.xpath("//li[@class='list-group-item active' and text()='bootstrap-duallist ']"));
-        System.out.println("Item after moved : "+rightBootStrap.getText());
-        String expResult = rightBootStrap.getText();
+        driver.findElement(By.xpath("//div[@class='well text-right']/div/div/div/input[@name='SearchDualList']")).sendKeys("bootstrap");
+        WebElement element = driver.findElement(By.xpath("//div[@class='well text-right']//ul[@class='list-group']"));
+        element.click();
         Thread.sleep(3000);
+        driver.findElement(By.xpath("//span[@class='glyphicon glyphicon-chevron-right']")).click();
+        //verify right hand side list box contains boootstrap text
+        List<WebElement> listBox = driver.findElements(By.xpath("//div[@class='well']//ul[@class='list-group']/li"));
+        Thread.sleep(3000);
+        System.out.println("Size of element on the right :"+listBox.size());
+        boolean isBootStrapPresent = false;
+        for (WebElement box : listBox) {
+            if(box.getText().equalsIgnoreCase("bootstrap-duallist"));
+            System.out.println("Bootstrap is present");
+            isBootStrapPresent= true;
 
 
-        Assert.assertEquals(actRes,expResult);
+        }
+
+        Assert.assertTrue(isBootStrapPresent);
     }
 
         @AfterClass

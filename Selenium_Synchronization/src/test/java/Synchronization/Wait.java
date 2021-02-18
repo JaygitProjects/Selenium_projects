@@ -19,10 +19,13 @@ public class Wait {
         driver = new ChromeDriver();
         driver.get("http://uitest.automationtester.uk/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //declaring implicit wait for are elements that using.findelements in the whole test
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
     }
     @Test
 public void testImplicitWait(){
-        //driver.findElement(By.id())
+        driver.findElement(By.id(""));
+
 
 
 }
